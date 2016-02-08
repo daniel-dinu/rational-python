@@ -6,5 +6,9 @@ python:
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
 
+os:
+  - linux
+  - osx
+
 # command to run tests
 script: python setup.py test
