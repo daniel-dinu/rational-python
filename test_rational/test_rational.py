@@ -645,7 +645,7 @@ class TestRational(TestCase):
         for base, power, expected_power in rpow_test_values:
             with self.subTest(base=base, power=power, expected_power=expected_power):
                 computed_power = base ** power
-                self.assertEqual(expected_power, computed_power)
+                self.assertAlmostEqual(expected_power, computed_power)
 
 
 if '__main__' == __name__:
