@@ -1,17 +1,17 @@
 language: python
 
-matrix:
-  include:
-    - python "3.4"
-      env: PYTHON_VERSION=3.4
-    - python "3.5"
-      env: PYTHON_VERSION=3.5
+python:
+  - "3.4"
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+  - "nightly" # currently points to 3.6-dev
 
+# OSX not supported:
+#   https://docs.travis-ci.com/user/multi-os/
+#   https://docs.travis-ci.com/user/languages/pythonc
 os:
   - linux
-  - osx
-
-install: ./.travis/install.sh
+#  - osx
 
 # command to run tests
 script: python setup.py test
