@@ -7,4 +7,4 @@ python:
   - "nightly" # currently points to 3.6-dev
 
 # command to run tests
-script: run_tests.py
+script: python setup.py test
