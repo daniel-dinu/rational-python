@@ -67,6 +67,25 @@ class TestRational(TestCase):
                 r = Rational(numerator, denominator)
                 self.assertEqual(expected_denominator, r.denominator)
 
+    def test_constructor_transform(self):
+        test_constructor_transform_values = [(Rational(1, 2), Rational(1, 2), Rational(1)),
+                                             (Rational(1, 2), Rational(1, 4), Rational(2)),
+                                             (Rational(1, 4), Rational(1, 2), Rational(1, 2)),
+                                             (Rational(-1, 2), Rational(1, 2), Rational(-1)),
+                                             (Rational(-1, 2), Rational(1, 4), Rational(-2)),
+                                             (Rational(-1, 4), Rational(1, 2), Rational(-1, 2)),
+                                             (Rational(1, 2), Rational(-1, 2), Rational(-1)),
+                                             (Rational(1, 2), Rational(-1, 4), Rational(-2)),
+                                             (Rational(1, 4), Rational(-1, 2), Rational(-1, 2)),
+                                             (Rational(-1, 2), Rational(-1, 2), Rational(1)),
+                                             (Rational(-1, 2), Rational(-1, 4), Rational(2)),
+                                             (Rational(-1, 4), Rational(-1, 2), Rational(1, 2))]
+
+        for a, b, expected_result in test_constructor_transform_values:
+            with self.subTest(a=a, b=b, expected_result=expected_result):
+                computed_result = Rational(a, b)
+                self.assertEqual(expected_result, computed_result)
+
     def test_transform(self):
         test_transform_values = [(1, 2, (1, 2)),
                                  (2, 4, (2, 4)),
@@ -386,7 +405,9 @@ class TestRational(TestCase):
                            (Rational(1, 4), Rational(2, 4), Rational(3, 4)),
                            (Rational(1, 4), Rational(3, 4), Rational(1, 1)),
                            (Rational(1, 4), Rational(-3, 4), Rational(-1, 2)),
-                           (Rational(1, 2), Rational(1, 3), Rational(5, 6))]
+                           (Rational(1, 2), Rational(1, 3), Rational(5, 6)),
+                           (Rational(2), -1, Rational(1)),
+                           (Rational(2), 1, Rational(3))]
 
         for r1, r2, expected_r in add_test_values:
             with self.subTest(r1=r1, r2=r2, expected_r=expected_r):
@@ -406,7 +427,9 @@ class TestRational(TestCase):
                            (Rational(1, 4), Rational(2, 4), Rational(-1, 4)),
                            (Rational(1, 4), Rational(3, 4), Rational(-1, 2)),
                            (Rational(1, 4), Rational(-3, 4), Rational(1, 1)),
-                           (Rational(1, 2), Rational(1, 3), Rational(1, 6))]
+                           (Rational(1, 2), Rational(1, 3), Rational(1, 6)),
+                           (Rational(2), -1, Rational(3)),
+                           (Rational(2), 1, Rational(1))]
 
         for r1, r2, expected_r in sub_test_values:
             with self.subTest(r1=r1, r2=r2, expected_r=expected_r):
@@ -426,7 +449,9 @@ class TestRational(TestCase):
                            (Rational(1, 4), Rational(2, 4), Rational(1, 8)),
                            (Rational(1, 4), Rational(3, 4), Rational(3, 16)),
                            (Rational(1, 4), Rational(-3, 4), Rational(-3, 16)),
-                           (Rational(1, 2), Rational(1, 3), Rational(1, 6))]
+                           (Rational(1, 2), Rational(1, 3), Rational(1, 6)),
+                           (Rational(2), 1, Rational(2)),
+                           (Rational(2), -1, Rational(-2))]
 
         for r1, r2, expected_r in mul_test_values:
             with self.subTest(r1=r1, r2=r2, expected_r=expected_r):
@@ -451,7 +476,9 @@ class TestRational(TestCase):
                            (Rational(1, 4), Rational(2, 4), Rational(1, 2)),
                            (Rational(1, 4), Rational(3, 4), Rational(1, 3)),
                            (Rational(1, 4), Rational(-3, 4), Rational(-1, 3)),
-                           (Rational(1, 2), Rational(1, 3), Rational(3, 2))]
+                           (Rational(1, 2), Rational(1, 3), Rational(3, 2)),
+                           (Rational(2), 1, Rational(2)),
+                           (Rational(2), -1, Rational(-2))]
 
         for r1, r2, expected_r in div_test_values:
             with self.subTest(r1=r1, r2=r2, expected_r=expected_r):
