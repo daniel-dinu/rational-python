@@ -15,6 +15,8 @@ DIVIDER_ZERO_DIVISION_ERROR_MESSAGE = 'The divider cannot be 0!'
 
 ZERO_TO_NEGATIVE_POWER_ZERO_DIVISION_ERROR_MESSAGE = '0 cannot be raised to a negative power!'
 
+NEGATIVE_INTEGER_TO_FRACTIONAL_POWER_ERROR_MESSAGE = 'Negative number cannot be raised to a fractional power!'
+
 FIRST_TERM_TYPE_ERROR_MESSAGE = 'The first term must be a rational or an integer value!'
 SECOND_TERM_TYPE_ERROR_MESSAGE = 'The second term must be a rational or an integer value!'
 
@@ -77,7 +79,7 @@ class Rational:
 
     @property
     def value(self):
-        return self.__numerator / self.__denominator
+        return self.__numerator / (self.__denominator * 1.0)
 
     @property
     def quotient(self):
@@ -97,7 +99,7 @@ class Rational:
         return RATIONAL_REPR_FORMAT.format(self.__class__.__name__, self.__numerator, self.__denominator)
 
     def __float__(self):
-        return self.__numerator / self.__denominator
+        return self.__numerator / (self.__denominator * 1.0)
 
     def __int__(self):
         return self.__numerator // self.__denominator
@@ -183,6 +185,9 @@ class Rational:
 
         return Rational(numerator, denominator)
 
+    def __div__(self, other):
+        return self.__truediv__(other)
+
     def __pow__(self, power):
         if not isinstance(power, int):
             raise TypeError(FIRST_TERM_TYPE_ERROR_MESSAGE)
@@ -226,5 +231,10 @@ class Rational:
         else:
             return Rational(other) / self
 
+    def __rdiv__(self, other):
+        return self.__rtruediv__(other)
+
     def __rpow__(self, power):
+        if 0 > power and 1 != self.denominator:
+            raise ValueError(NEGATIVE_INTEGER_TO_FRACTIONAL_POWER_ERROR_MESSAGE)
         return power ** self.value

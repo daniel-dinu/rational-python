@@ -1,3 +1,5 @@
+import contextlib
+import sys
 import unittest
 from unittest import TestCase
 
@@ -9,6 +11,15 @@ __author__ = 'Daniel Dinu'
 
 
 class TestRational(TestCase):
+    @contextlib.contextmanager
+    def subTest(self, msg=None, **params):
+        if (3, 4) > sys.version_info:
+            yield
+            return
+
+        parent = super(TestRational, self)
+        with parent.subTest(msg, **params):
+            yield
 
     def setUp(self):
         self.known_values = [(1, 2, 1, 2),
@@ -141,7 +152,7 @@ class TestRational(TestCase):
         for numerator, denominator, expected_numerator, expected_denominator in self.known_values:
             with self.subTest(numerator=numerator, denominator=denominator):
                 r = Rational(numerator, denominator)
-                expected_value = expected_numerator / expected_denominator
+                expected_value = expected_numerator / (expected_denominator * 1.0)
                 self.assertEqual(expected_value, r.value)
 
     def test_quotient(self):
@@ -179,7 +190,7 @@ class TestRational(TestCase):
         for numerator, denominator, expected_numerator, expected_denominator in self.known_values:
             with self.subTest(numerator=numerator, denominator=denominator):
                 r = Rational(numerator, denominator)
-                expected_value = expected_numerator / expected_denominator
+                expected_value = expected_numerator / (expected_denominator * 1.0)
                 self.assertEqual(expected_value, float(r))
 
     def test_int(self):
@@ -606,41 +617,52 @@ class TestRational(TestCase):
                 with self.assertRaises(ZeroDivisionError):
                     base ** power
 
+    def test_rpow_value_error(self):
+        rpow_test_values = [(-2, Rational(1, 2)),
+                            (-1, Rational(1, 2)),
+                            (-3, Rational(-1, 2)),
+                            (-2, Rational(-1, 2)),
+                            (-1, Rational(-1, 2)),
+                            (-3, Rational(1, 3)),
+                            (-2, Rational(1, 3)),
+                            (-1, Rational(1, 3)),
+                            (-3, Rational(-1, 3)),
+                            (-2, Rational(-1, 3)),
+                            (-1, Rational(-1, 3))]
+
+        for base, power in rpow_test_values:
+            with self.subTest(base=base, power=power):
+                with self.assertRaises(ValueError):
+                    base ** power
+
     def test_rpow(self):
         rpow_test_values = [(0, Rational(), 1),
                             (1, Rational(), 1),
                             (2, Rational(), 1),
                             (3, Rational(), 1),
 
-                            (-3, Rational(1, 2), (1.0605752387249068e-16+1.7320508075688772j)),
-                            (-2, Rational(1, 2), (8.659560562354934e-17+1.4142135623730951j)),
-                            (-1, Rational(1, 2), (6.123233995736766e-17+1j)),
                             (0, Rational(1, 2), 0),
                             (1, Rational(1, 2), 1),
                             (2, Rational(1, 2), 1.4142135623730951),
                             (3, Rational(1, 2), 1.7320508075688772),
 
-                            (-3, Rational(-1, 2), (3.5352507957496895e-17-0.5773502691896257j)),
-                            (-2, Rational(-1, 2), (4.329780281177467e-17-0.7071067811865476j)),
-                            (-1, Rational(-1, 2), (6.123233995736766e-17-1j)),
                             (1, Rational(-1, 2), 1),
                             (2, Rational(-1, 2), 0.7071067811865476),
                             (3, Rational(-1, 2), 0.5773502691896257),
 
-                            (-3, Rational(1, 3), (0.7211247851537043+1.2490247664834064j)),
-                            (-2, Rational(1, 3), (0.6299605249474367+1.0911236359717214j)),
-                            (-1, Rational(1, 3), (0.5000000000000001+0.8660254037844386j)),
                             (0, Rational(1, 3), 0),
                             (1, Rational(1, 3), 1),
                             (2, Rational(1, 3), 1.2599210498948732),
                             (3, Rational(1, 3), 1.4422495703074083),
 
-                            (-3, Rational(-1, 3), (0.34668063717531744-0.6004684775880014j)),
-                            (-2, Rational(-1, 3), (0.39685026299205-0.6873648184993013j)),
-                            (-1, Rational(-1, 3), (0.5000000000000001-0.8660254037844386j)),
                             (1, Rational(-1, 3), 1),
                             (2, Rational(-1, 3), 0.7937005259840998),
-                            (3, Rational(-1, 3), 0.6933612743506348)]
+                            (3, Rational(-1, 3), 0.6933612743506348),
+
+                            (-1, Rational(1), -1),
+                            (-2, Rational(1), -2),
+                            (-1, Rational(-1), -1),
+                            (-2, Rational(-2), 0.25)]
 
         for base, power, expected_power in rpow_test_values:
             with self.subTest(base=base, power=power, expected_power=expected_power):
