@@ -1,10 +1,10 @@
 __author__ = 'Daniel Dinu'
 
 
-NUMERATOR_STR_FORMAT = '{}'
-RATIONAL_STR_FORMAT = '{}/{}'
+NUMERATOR_STR_FORMAT = '{0}'
+RATIONAL_STR_FORMAT = '{0}/{1}'
 
-RATIONAL_REPR_FORMAT = '{}({}, {})'
+RATIONAL_REPR_FORMAT = '{0}({1}, {2})'
 
 NUMERATOR_TYPE_ERROR_MESSAGE = 'The numerator of a rational must be a rational or an integer value!'
 DENOMINATOR_TYPE_ERROR_MESSAGE = 'The denominator of a rational must be a rational or an integer value!'

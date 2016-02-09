@@ -174,16 +174,16 @@ class TestRational(TestCase):
             with self.subTest(numerator=numerator, denominator=denominator):
                 r = Rational(numerator, denominator)
                 if 1 == expected_denominator:
-                    expected_str = '{}'.format(expected_numerator)
+                    expected_str = '{0}'.format(expected_numerator)
                 else:
-                    expected_str = '{}/{}'.format(expected_numerator, expected_denominator)
+                    expected_str = '{0}/{1}'.format(expected_numerator, expected_denominator)
                 self.assertEqual(expected_str, str(r))
 
     def test_repr(self):
         for numerator, denominator, expected_numerator, expected_denominator in self.known_values:
             with self.subTest(numerator=numerator, denominator=denominator):
                 r = Rational(numerator, denominator)
-                expected_repr = 'Rational({}, {})'.format(expected_numerator, expected_denominator)
+                expected_repr = 'Rational({0}, {1})'.format(expected_numerator, expected_denominator)
                 self.assertEqual(expected_repr, repr(r))
 
     def test_float(self):
