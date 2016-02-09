@@ -18,6 +18,7 @@ os:
 #  - osx
 
 before_install:
+  - pip install unittest2
   - pip install codecov
 
 # command to run tests
