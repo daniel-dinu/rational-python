@@ -1,7 +1,7 @@
 import contextlib
 import sys
-import unittest
-from unittest import TestCase
+import unittest2
+from unittest2 import TestCase
 
 from rational.rational import gcd
 from rational.rational import Rational
@@ -671,4 +671,4 @@ class TestRational(TestCase):
 
 
 if '__main__' == __name__:
-    unittest.main()
+    unittest2.main()
