@@ -1,5 +1,3 @@
-import contextlib
-import sys
 import unittest2
 from unittest2 import TestCase
 
@@ -11,16 +9,6 @@ __author__ = 'Daniel Dinu'
 
 
 class TestRational(TestCase):
-    @contextlib.contextmanager
-    def subTest(self, msg=None, **params):
-        if (3, 4) > sys.version_info:
-            yield
-            return
-
-        parent = super(TestRational, self)
-        with parent.subTest(msg, **params):
-            yield
-
     def setUp(self):
         self.known_values = [(1, 2, 1, 2),
                              (-1, 2, -1, 2),
