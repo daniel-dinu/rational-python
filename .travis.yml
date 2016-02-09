@@ -26,5 +26,5 @@ script: python setup.py test
 
 after_success:
   - pip install coverage
-  - coverage xml rational/rational.py
+  - coverage run -m test_rational.test_rational
   - codecov
