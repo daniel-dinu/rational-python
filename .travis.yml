@@ -34,13 +34,15 @@ matrix:
           osx_image: xcode7.1
           env: TOXENV=py33
 
-before_install:
-  - ./.travis/install.sh
-  - pip install coverage
-  - pip install codecov
+#before_install:
+#  - ./.travis/install.sh
+#  - pip install coverage
+#  - pip install codecov
 
 # command to install dependencies
-install: "pip install -r requirements.txt"
+#install: "pip install -r requirements.txt"
+install:
+  - ./.travis/install.sh
 
 # command to run tests
 script: python setup.py test
