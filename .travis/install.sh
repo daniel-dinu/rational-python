@@ -1,5 +1,14 @@
 #!/bin/bash
 
+set -e
+set -x
+
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+    echo "D"
+else
+    echo "L"
+fi
+
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     echo "OSX"
 
@@ -24,6 +33,9 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
             pyenv global 3.3.6
             ;;
     esac
+
+    pyenv rehash
+    python -m pip install --user virtualenv
 else
     # Install some custom requirements on Linux
     echo "Linux"
