@@ -50,3 +50,5 @@ source ~/.venv/bin/activate
 
 pip install coverage
 pip install codecov
+
+pip install -r requirements.txt
