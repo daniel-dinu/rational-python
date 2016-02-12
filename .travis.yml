@@ -1,23 +1,41 @@
 language: python
 
-python:
-  - "2.6"
-  - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.5-dev" # 3.5 development branch
-  - "nightly" # currently points to 3.6-dev
+#python:
+#  - "2.6"
+#  - "2.7"
+#  - "3.2"
+#  - "3.3"
+#  - "3.4"
+#  - "3.5"
+#  - "3.5-dev" # 3.5 development branch
+#  - "nightly" # currently points to 3.6-dev
 
 # OSX not supported:
 #   https://docs.travis-ci.com/user/multi-os/
 #   https://docs.travis-ci.com/user/languages/pythonc
-os:
-  - linux
+#os:
+#  - linux
 #  - osx
 
+matrix:
+    include:
+        - os: linux
+          sudo: required
+          python: 3.2
+          env: TOXENV=py32
+        - os: linux
+          sudo: required
+          python: 3.3
+          env: TOXENV=py33
+        - os: osx
+          language: generic
+          env: TOXENV=py32
+        - os: osx
+          language: generic
+          env: TOXENV=py33
+
 before_install:
+  - ./.travis/install.sh
   - pip install coverage
   - pip install codecov
 
