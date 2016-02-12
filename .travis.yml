@@ -17,7 +17,7 @@ language: python
 #  - linux
 #  - osx
 
-sudo: false
+sudo: required
 
 matrix:
     include:
