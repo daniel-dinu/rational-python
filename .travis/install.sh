@@ -3,6 +3,7 @@
 #!/bin/bash
 
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+    echo "OSX"
 
     # Install some custom requirements on OS X
     # e.g. brew install pyenv-virtualenv
@@ -30,4 +31,5 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     source ~/.venv/bin/activate
 else
     # Install some custom requirements on Linux
+    echo "Linux"
 fi
