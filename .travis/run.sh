@@ -3,7 +3,7 @@
 set -e
 set -x
 
-if [[ "$(uname -s)" == "Darwin" ]]; then
+if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     # Initialize pyenv
     PYENV_ROOT="$HOME/.pyenv"
     PATH="$PYENV_ROOT/bin:$PATH"

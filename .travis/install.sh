@@ -3,17 +3,8 @@
 set -e
 set -x
 
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-    echo "D"
-else
-    echo "L"
-fi
-
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-    echo "OSX"
-
     # Install some custom requirements on OS X
-    # e.g. brew install pyenv-virtualenv
 
     # Install pyenv
     git clone https://github.com/yyuu/pyenv.git ~/.pyenv
@@ -22,15 +13,21 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     eval "$(pyenv init -)"
 
     case "${TOXENV}" in
-        py32)
-            # Install some custom Python 3.2 requirements on OS X
-            pyenv install 3.2.6
-            pyenv global 3.2.6
+        py26|py27)
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py --user
             ;;
         py33)
-            # Install some custom Python 3.3 requirements on OS X
             pyenv install 3.3.6
             pyenv global 3.3.6
+            ;;
+        py34)
+            pyenv install 3.4.4
+            pyenv global 3.4.4
+            ;;
+        py35)
+            pyenv install 3.5.1
+            pyenv global 3.5.1
             ;;
     esac
 
@@ -38,7 +35,6 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     python -m pip install --user virtualenv
 else
     # Install some custom requirements on Linux
-    echo "Linux"
 
     pip install virtualenv
 fi

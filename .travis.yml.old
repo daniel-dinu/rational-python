@@ -1,0 +1,32 @@
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+  - "nightly" # currently points to 3.6-dev
+
+# OSX not supported:
+#   https://docs.travis-ci.com/user/multi-os/
+#   https://docs.travis-ci.com/user/languages/pythonc
+os:
+  - linux
+#  - osx
+
+before_install:
+  - pip install coverage
+  - pip install codecov
+
+# command to install dependencies
+install: "pip install -r requirements.txt"
+
+# command to run tests
+script: python setup.py test
+
+after_success:
+  - coverage run -m test_rational.test_rational
+  - codecov
