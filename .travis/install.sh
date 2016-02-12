@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     echo "OSX"
 
@@ -26,10 +24,12 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
             pyenv global 3.3.6
             ;;
     esac
-
-    # Activate virtual environment
-    source ~/.venv/bin/activate
 else
     # Install some custom requirements on Linux
     echo "Linux"
+
+    pip install virtualenv
 fi
+
+# Activate virtual environment
+source ~/.venv/bin/activate
