@@ -45,7 +45,8 @@ install:
   - ./.travis/install.sh
 
 # command to run tests
-script: python setup.py test
+script:
+  - ./.travis/run.sh
 
 after_success:
   - coverage run -m test_rational.test_rational
