@@ -43,5 +43,10 @@ else
     pip install virtualenv
 fi
 
+python -m virtualenv ~/.venv
+
 # Activate virtual environment
 source ~/.venv/bin/activate
+
+pip install coverage
+pip install codecov
