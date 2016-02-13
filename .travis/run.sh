@@ -11,7 +11,7 @@ set -x
 #fi
 
 # Activate virtual environment
-source ~/.venv/bin/activate
+#source ~/.venv/bin/activate
 
 python --version
 
