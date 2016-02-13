@@ -91,3 +91,6 @@ script:
 
 after_success:
   - ./.travis/coverage.sh
+
+notifications:
+  email: false
