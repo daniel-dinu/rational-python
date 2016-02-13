@@ -4,8 +4,6 @@ cache:
   directories:
     - $HOME/.cache/pip
 
-sudo: required
-
 matrix:
     include:
         # Linux
@@ -92,5 +90,4 @@ script:
   - ./.travis/run.sh
 
 after_success:
-  - coverage run -m test_rational.test_rational
-  - codecov
+  - ./.travis/coverage.sh

@@ -6,6 +6,5 @@ set -x
 # Activate virtual environment
 source ~/.venv/bin/activate
 
-python --version
-
-python setup.py test
+coverage run -m test_rational.test_rational
+codecov
