@@ -4,7 +4,7 @@ cache:
   directories:
     - $HOME/.cache/pip
 
-sudo: required
+#sudo: required
 
 matrix:
     include:
