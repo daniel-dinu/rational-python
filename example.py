@@ -66,9 +66,3 @@ print('{} == {} : {}'.format(s, p, s == p))
 print('{} != {} : {}'.format(s, p, s != p))
 print('{} >= {} : {}'.format(s, p, s >= p))
 print('{} >  {} : {}'.format(s, p, s > p))
-
-
-
-
-import numbers
-numbers.Rational
