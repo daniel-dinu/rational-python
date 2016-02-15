@@ -42,7 +42,7 @@ class TestRational(TestCase):
     def test_constructor_denominator_zero_division_error(self):
         numerator = 1
         denominator = 0
-        with self.subTest(numerator=numerator):
+        with self.subTest(numerator=numerator, denominator=denominator):
             self.assertRaises(ZeroDivisionError, Rational, numerator, denominator)
 
         numerator = Rational()
