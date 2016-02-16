@@ -13,6 +13,8 @@ DENOMINATOR_ZERO_DIVISION_ERROR_MESSAGE = 'The denominator of a rational number 
 
 DIVIDER_ZERO_DIVISION_ERROR_MESSAGE = 'The divider cannot be 0!'
 
+POWER_TYPE_ERROR_MESSAGE = 'The power must be an integer value!'
+
 ZERO_TO_NEGATIVE_POWER_ZERO_DIVISION_ERROR_MESSAGE = '0 cannot be raised to a negative power!'
 
 NEGATIVE_INTEGER_TO_FRACTIONAL_POWER_ERROR_MESSAGE = 'Negative number cannot be raised to a fractional power!'
@@ -190,7 +192,7 @@ class Rational:
 
     def __pow__(self, power):
         if not isinstance(power, int):
-            raise TypeError(FIRST_TERM_TYPE_ERROR_MESSAGE)
+            raise TypeError(POWER_TYPE_ERROR_MESSAGE)
 
         if 0 > power and 0 == self.__numerator:
             raise ZeroDivisionError(ZERO_TO_NEGATIVE_POWER_ZERO_DIVISION_ERROR_MESSAGE)

@@ -320,7 +320,7 @@ class TestRational(TestCase):
             with self.subTest(r1=r1, r2=r2, result=False):
                 self.assertFalse(r1 == r2)
 
-    def test_neq(self):
+    def test_ne(self):
         true_test_cases = [(Rational(-1, 2), Rational()),
                            (Rational(), Rational(1, 2)),
                            (Rational(1, 2), Rational()),
